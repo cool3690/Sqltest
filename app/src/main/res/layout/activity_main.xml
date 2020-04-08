@@ -17,19 +17,29 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:ems="10"
+            android:inputType="none"
             android:hint="手機號碼">
 
-            <requestFocus />
-        </EditText>
 
+        </EditText>
+        <EditText
+            android:id="@+id/acc2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/acc"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:hint="手機號碼">
+
+
+        </EditText>
         <!---->
 
         <Button
             android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/acc"
+            android:layout_below="@+id/acc2"
             android:layout_marginTop="15dp"
             android:text="login" />
 
@@ -54,10 +64,23 @@
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/imageView"/>
+            android:layout_height="100dp"
+            android:layout_below="@id/imageView">
 
 
+        </ListView>
+        <Button
+            android:id="@+id/btn1"
+            android:layout_below="@id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cat" />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_below="@id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="apple" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

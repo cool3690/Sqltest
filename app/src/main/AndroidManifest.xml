@@ -23,7 +23,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Fraction" />
         <activity android:name=".Nextpage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+
+            >
+
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

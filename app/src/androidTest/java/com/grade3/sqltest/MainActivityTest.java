@@ -33,12 +33,13 @@ public class MainActivityTest {
         }
         Espresso.onView( withId(R.id.acc) ).perform( closeSoftKeyboard() );
         Espresso.onView(withText("login")).perform(click());
+
         // Espresso.pressBack();
     }
     public void NextTest() {
         //通過id找到edittext，在裏面輸入2並關閉輸入法
         //intended(hasComponent(DetailActivity::Ne));
-
+        Espresso.onView(withId(R.id.textView2)).perform(typeText("wsc2"));
         Espresso.onView(withId(R.id.textView2)).perform(typeText("wsc2"));
     }
 }

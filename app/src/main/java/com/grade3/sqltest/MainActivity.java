@@ -1,13 +1,16 @@
 package com.grade3.sqltest;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -29,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     ListView listview;
     List<Boolean> listShow;    // 這個用來記錄哪幾個 item 是被打勾的
 
-    private EditText acc;
-    Button btn;
+    private EditText acc,acc2;
+    Button btn,btn1,btn2;
     ImageView imageView;
-    String mycart="",account="",names="",passwd="";
+    String mycart="",account="",names="",passwd="",s="",r="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 .build());
 
         acc=(EditText)findViewById(R.id.acc);
+        acc2=(EditText)findViewById(R.id.acc2);
 
         btn=(Button)findViewById(R.id.btn);
+        btn1=(Button)findViewById(R.id.btn1);
+        btn2=(Button)findViewById(R.id.btn2);
         imageView=(ImageView)findViewById(R.id.imageView);
         Bitmap bmp = null;
         try {
@@ -97,10 +103,46 @@ public class MainActivity extends AppCompatActivity {
         g1[0]="2w";
         g1[1]="2wwwww";
        gv.setPart(g1);
+        acc.setInputType(InputType.TYPE_NULL);
 
+        btn1.setOnClickListener(btn12);
+        btn2.setOnClickListener(btn12);
 
     }
+    private Button.OnClickListener btn12=new Button.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn1:
 
+                    if(acc.isFocused()){
+                        s=s+"cat";
+                        acc.setText(s);
+                    }else if(acc2.isFocused()){
+                        r=r+"cat";
+                        acc2.setText(r);
+                    }
+
+                    break;
+
+                case R.id.btn2:
+
+                    if(acc.isFocused()){
+                        s=s+"apple";
+                        acc.setText(s);
+                    }else if(acc2.isFocused()){
+                        r=r+"apple";
+                        acc2.setText(r);
+                    }
+
+                    //same problem .....
+                    break;
+
+
+            }
+
+        }
+    };
     private Button.OnClickListener btnlogin=new Button.OnClickListener(){
 
 
