@@ -24,7 +24,7 @@
         <activity android:name=".Fraction" />
         <activity android:name=".Nextpage" />
         <activity android:name=".MainActivity"
-
+            android:windowSoftInputMode="stateHidden|adjustResize"
             >
 
 

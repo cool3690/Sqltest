@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.InputType;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -103,12 +106,24 @@ public class MainActivity extends AppCompatActivity {
         g1[0]="2w";
         g1[1]="2wwwww";
        gv.setPart(g1);
-        acc.setInputType(InputType.TYPE_NULL);
-
+        //acc.setInputType(InputType.TYPE_NULL);
+        acc.setOnTouchListener(accbtn);
         btn1.setOnClickListener(btn12);
         btn2.setOnClickListener(btn12);
 
     }
+    private EditText.OnTouchListener accbtn=new EditText.OnTouchListener(){
+        @Override
+        public boolean onTouch(View v, MotionEvent motionEvent) {
+            v.onTouchEvent(motionEvent);
+            InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+            return true;
+        }
+    };
+
     private Button.OnClickListener btn12=new Button.OnClickListener(){
         @Override
         public void onClick(View v) {
