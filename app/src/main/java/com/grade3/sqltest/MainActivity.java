@@ -1,10 +1,16 @@
 package com.grade3.sqltest;
 
 import android.accounts.Account;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -38,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText acc,acc2;
     Button btn,btn1,btn2;
     ImageView imageView;
+    TextView t4;
     String mycart="",account="",names="",passwd="",s="",r="";
-
+    public MediaPlayer mediaplayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         acc=(EditText)findViewById(R.id.acc);
         acc2=(EditText)findViewById(R.id.acc2);
+        t4=(TextView)findViewById(R.id.t4);
 
         btn=(Button)findViewById(R.id.btn);
         btn1=(Button)findViewById(R.id.btn1);
@@ -67,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bmp = null;
         try {
             URL url = new URL("https://akkyschool.com/images/banner02.jpg");
-            // http://web0204.byethost17.com/image/t02.png
            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {}
         imageView.setImageBitmap(bmp);
@@ -107,11 +114,32 @@ public class MainActivity extends AppCompatActivity {
         g1[1]="2wwwww";
        gv.setPart(g1);
         //acc.setInputType(InputType.TYPE_NULL);
-        acc.setOnTouchListener(accbtn);
+       // acc.setOnTouchListener(accbtn);
         btn1.setOnClickListener(btn12);
         btn2.setOnClickListener(btn12);
+        String url = "http://demo.akkyschool.com/a.mp3";
+        mediaplayer=new MediaPlayer();
+        acc.setText("hello");
+        disableedit(acc);
+
+
+        /*
+        try {
+            mediaplayer.setDataSource(url);
+            mediaplayer.prepare();
+        } catch (IOException e) {}
+        */
 
     }
+public void disableedit(EditText editText){
+       // editText.setFocusable(false);
+        editText.setEnabled(false);
+       // editText.setCursorVisible(false);
+      //  editText.setKeyListener(null);
+    editText.setBackgroundColor(Color.TRANSPARENT);
+
+}
+/*
     private EditText.OnTouchListener accbtn=new EditText.OnTouchListener(){
         @Override
         public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -123,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
-
+*/
     private Button.OnClickListener btn12=new Button.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -160,11 +188,22 @@ public class MainActivity extends AppCompatActivity {
     };
     private Button.OnClickListener btnlogin=new Button.OnClickListener(){
 
-
         public void onClick(View v){
-            Intent intent =new Intent(MainActivity.this,Nextpage.class);
+            mediaplayer.reset();
+            String url = "http://demo.akkyschool.com/a.mp3";
+            try {
+                mediaplayer.setDataSource(url);
+                mediaplayer.prepare();
+                mediaplayer.start();
+            } catch (IOException e) { }
+
+            Intent intent= new Intent();//轉跳另一頁，並顯示帳密及信箱
+            intent.setClass(MainActivity.this,Conversion.class);
             startActivity(intent);
-            /*
+
+
+
+             /*
             String account=acc.getText().toString();
             String result =dblogin.executeQuery(account);
             try{

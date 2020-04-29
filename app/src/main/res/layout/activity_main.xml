@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-      >
+        >
 
 
         <EditText
@@ -17,9 +17,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:windowSoftInputMode="stateAlwaysHidden"
-
-            android:hint="手機號碼">
+            android:hint="12223">
 
 
         </EditText>
@@ -29,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/acc"
             android:layout_marginTop="10dp"
-            android:editable="false"
             android:hint="手機號碼">
 
 
@@ -49,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_below="@id/btn"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="31dp"
             android:layout_toRightOf="@id/imageView"
             android:src="@mipmap/ic_launcher_round" />
 
@@ -82,6 +79,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="apple" />
+
+        <TextView
+            android:id="@+id/t4"
+            android:layout_below="@id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PEN" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
