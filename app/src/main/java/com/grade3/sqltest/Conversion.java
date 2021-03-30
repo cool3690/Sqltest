@@ -1,5 +1,6 @@
 package com.grade3.sqltest;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -21,7 +22,7 @@ import java.util.Random;
 
 public class Conversion extends AppCompatActivity {
     TextView T1,T2,T3,show;
-    EditText Q1,Q2,Q3;
+    EditText Q1,Q2,Q3,name;
     Button btok;
     int tf=0;
     String word="L";
@@ -36,6 +37,7 @@ public class Conversion extends AppCompatActivity {
         T3=(TextView)findViewById(R.id.T3);
         show=(TextView)findViewById(R.id.show);
         Q1=(EditText)findViewById(R.id.Q1);
+        name=(EditText)findViewById(R.id.name);
         Q2=(EditText)findViewById(R.id.Q2);
         Q3=(EditText)findViewById(R.id.Q3);
         btok=(Button)findViewById(R.id.btok);
@@ -154,5 +156,13 @@ public class Conversion extends AppCompatActivity {
         Toast toast=Toast.makeText(this, str, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();  // Always call the superclass method first
+
+        Intent intent =new Intent();
+        intent.setClass(Conversion.this,MainActivity.class);
+        startActivity(intent);
     }
 }

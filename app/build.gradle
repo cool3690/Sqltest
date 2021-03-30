@@ -38,4 +38,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     androidTestImplementation 'androidx.test:rules:1.2.0-beta01'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+
 }

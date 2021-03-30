@@ -1,14 +1,17 @@
 package com.grade3.sqltest;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -35,15 +38,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 public class MainActivity extends AppCompatActivity {
     List<String> list;
+    String url="";
     String [] g1=new String[2];
     ListView listview;
+    DragFloatActionButton  img_btn;
     List<Boolean> listShow;    // 這個用來記錄哪幾個 item 是被打勾的
-
+    String []filename= new String[]{"st02_01.mp3","st02_02.mp3","st02_03.mp3","st02_04.mp3","st02_05.mp3"};
+    //int[] draw= new int[]{R.drawable.st02_01,R.drawable.st02_02,R.drawable.st02_03,R.drawable.st02_04,R.drawable.st02_05};
     private EditText acc,acc2;
     Button btn,btn1,btn2;
     ImageView imageView;
+    MediaMetadataRetriever retriever;
     TextView t4;
     String mycart="",account="",names="",passwd="",s="",r="";
     public MediaPlayer mediaplayer;
@@ -63,30 +72,29 @@ public class MainActivity extends AppCompatActivity {
                 .penaltyLog()
                 .penaltyDeath()
                 .build());
-
-        acc=(EditText)findViewById(R.id.acc);
         acc2=(EditText)findViewById(R.id.acc2);
+/*
+        acc=(EditText)findViewById(R.id.acc);
+
         t4=(TextView)findViewById(R.id.t4);
 
         btn=(Button)findViewById(R.id.btn);
         btn1=(Button)findViewById(R.id.btn1);
         btn2=(Button)findViewById(R.id.btn2);
         imageView=(ImageView)findViewById(R.id.imageView);
+
         Bitmap bmp = null;
         try {
             URL url = new URL("https://akkyschool.com/images/banner02.jpg");
            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (IOException e) {}
+
         imageView.setImageBitmap(bmp);
 
         btn.setOnClickListener(btnlogin);
-        /*   */
-        DragFloatActionButton mBtn = findViewById(R.id.img_btn);
-        mBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+
+
+
 
         listview = (ListView) findViewById(R.id.listview);
         listShow = new ArrayList<Boolean>();
@@ -113,32 +121,40 @@ public class MainActivity extends AppCompatActivity {
         g1[0]="2w";
         g1[1]="2wwwww";
        gv.setPart(g1);
-        //acc.setInputType(InputType.TYPE_NULL);
-       // acc.setOnTouchListener(accbtn);
         btn1.setOnClickListener(btn12);
         btn2.setOnClickListener(btn12);
-        String url = "http://demo.akkyschool.com/a.mp3";
         mediaplayer=new MediaPlayer();
         acc.setText("hello");
         disableedit(acc);
-
-
-        /*
-        try {
-            mediaplayer.setDataSource(url);
-            mediaplayer.prepare();
-        } catch (IOException e) {}
         */
+        img_btn = findViewById(R.id.img_btnw);
+        img_btn.setOnClickListener(imgs);
+        getPermission();
 
     }
+    private DragFloatActionButton.OnClickListener imgs=new DragFloatActionButton.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            acc2.setVisibility(View.GONE);
+            Intent intent=new Intent();
+            intent.setClass(MainActivity.this,Qrcode.class);
+            startActivity(intent);
+            mytoast("sss");
+        }
+    };
 public void disableedit(EditText editText){
-       // editText.setFocusable(false);
+
         editText.setEnabled(false);
-       // editText.setCursorVisible(false);
-      //  editText.setKeyListener(null);
     editText.setBackgroundColor(Color.TRANSPARENT);
 
 }
+    public void getPermission(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+
+        }
+    }
 /*
     private EditText.OnTouchListener accbtn=new EditText.OnTouchListener(){
         @Override
@@ -151,7 +167,7 @@ public void disableedit(EditText editText){
             return true;
         }
     };
-*/
+
     private Button.OnClickListener btn12=new Button.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -185,35 +201,37 @@ public void disableedit(EditText editText){
             }
 
         }
-    };
+    };*/
     private Button.OnClickListener btnlogin=new Button.OnClickListener(){
 
         public void onClick(View v){
+            /*
             mediaplayer.reset();
             String url = "http://demo.akkyschool.com/a.mp3";
             try {
                 mediaplayer.setDataSource(url);
-                mediaplayer.prepare();
-                mediaplayer.start();
-            } catch (IOException e) { }
 
-            Intent intent= new Intent();//轉跳另一頁，並顯示帳密及信箱
+                mediaplayer.prepare();
+
+                mediaplayer.start();
+
+
+            } catch (IOException e) { }
+           */
+            Intent intent= new Intent();
             intent.setClass(MainActivity.this,Conversion.class);
             startActivity(intent);
-
-
+            /* * /
 
              /*
             String account=acc.getText().toString();
             String result =dblogin.executeQuery(account);
             try{
                 JSONArray jsonArray = new JSONArray(result);
-
                 for(int i = 0; i < jsonArray.length(); i++)
                 {	 JSONObject jsonData = jsonArray.getJSONObject(i);
                     String email=jsonData.getString("email");
-                    Intent intent= new Intent();//轉跳另一頁，並顯示帳密及信箱
-                    startActivity(intent);
+
                 }
             }
             catch(Exception e){}
